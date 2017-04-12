@@ -1,0 +1,14 @@
+To run the White Box Testing case, we provide you a shell script that you can simply 
+  call ./run.sh
+  to run white box
+And it will automatically call the testing files. 
+You can see the output on screen as well.
+
+To run the Black Box Testing case, 
+  You have to cd /home/student/desktop/310Imple_Final/csci310_Spring_P1/Project
+  and run bin/behat features/search.feature
+          bin/behat features/share.feature
+
+
+If you want to take step to look into the code the Project position is
+    /home/student/desktop/310Imple_Final/csci310_Spring_P1/Project/tests

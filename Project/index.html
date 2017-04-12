@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Lyrics Cloud</title>
+	<!-- Le styles -->
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/2.2.2/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/2.2.2/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="./autocomplete/jquery-ui.css">
+	<link rel = "stylesheet" href = "./css/index_style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.min.js"></script>
+	<script src="./src/wordcloud2.js"></script>
+	<script src="./index.js"></script>
+	<script src="./request.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="./autocomplete/jquery-ui.js"></script>
+	<script src = "./src/imgurURL.js"></script>
+</head>
+<body>
+	<script>
+		window.onload = function(){
+			hideButton(true);
+		}
+	</script>
+	<script>
+		window.fbAsyncInit = function(){
+			FB.init({
+				appId: '1895136497388728',
+				xfbml: true,
+				version: 'v2.8'
+			});
+			FB.AppEvents.logPageView();
+		};
+		(function(d,s,id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if(d.getElementById(id)){return;}
+			js = d.createElement(s);js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js,fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<header align = "center">
+		<div class = "container">
+			<h1><string>Lyrics Cloud</strong></h1>
+		</div>
+		<div id = "not-supported" class = "alert" hidden>
+			<strong>
+				Your browser is not supported.
+			</strong>
+		</div>
+	</header>
+
+	<section id = "form">
+		<form id="form" method="get" action="">
+				<div class="ui-widget" align = "center">
+					<input id="artistSearch">
+				</div>			
+		</form>
+	</section>
+
+	<section id = "buttons">
+		<form align = "center">
+			<div class = "container">
+				<button class = "click_buttons2" id = "tempButton" onclick = "get_WordCloud();hideButton(false);" type = "buttons">Get Me My Artist Name!</button>
+			</div>
+		</form>
+	</section>
+
+	<section id = "form">
+		<canvas id = "mycanvas" class = "canvas" width="1980" height="720"></canvas>
+	</section>
+
+	<section id = "buttons">
+		<form align = "center">
+			<div class = "container">
+				<button class = "click_buttons" id = "btn-search" onclick = "get_WordCloud();" type = "buttons">Search</button>
+				<button input id = "share_button" onclick = "share()" class="click_buttons"  type = "buttons" disabled>Share</button>
+				<button class = "click_buttons" id = "btn-add" onclick = "get_WordCloud" type = "buttons" disabled>Add</button>
+			</div>
+		</form>
+	</section>
+
+	<div id="input-list" class="span12"><div>
+	<div id="config-option" class="span12"></div>
+	<input type="hidden" id="config-dppx" class="input-mini" min="1" value="1" required>
+   
+    <script>
+	   function share(){
+		    var data = getImage64();
+    		upload();
+		   	FB.ui({
+    			method: 'share',
+    			display: 'popup',
+    			href: "temp",
+  				}, function(response){});
+			}
+	   
+	</script>
+     <script>
+		function get_WordCloud(){
+			getArtist();
+			document.getElementById("share_button").disabled = false;
+			document.getElementById("btn-add").disabled = false;
+		}
+	</script>
+		<script>
+		function hideButton(hidden){
+			if(hidden){
+				document.getElementById("share_button").style.visibility = 'hidden';
+				document.getElementById("btn-add").style.visibility = 'hidden';
+				document.getElementById("btn-search").style.visibility = 'hidden';
+			}
+			else{
+				document.getElementById("share_button").style.visibility = 'visible';
+				document.getElementById("btn-add").style.visibility = 'visible';
+				document.getElementById("btn-search").style.visibility = 'visible';
+				document.getElementById("tempButton").style.visibility = 'hidden';
+			}
+
+		}
+	</script>
+	<script>
+		function getImage64(){
+			var canvas = document.getElementById("mycanvas");
+			return canvas.toDataURL();
+		}
+	</script>
+
+</body>
+
+</html>

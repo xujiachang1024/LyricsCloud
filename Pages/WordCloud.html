@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Generate a word cloud from input artist">
+        <meta name="author" content="Yawen Cao">
+        <meta name="artists" content="">
+        <title>Word Cloud</title>
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+    <body>
+       <!-- Load Facebook SDK -->
+        <script>
+			window.fbAsyncInit = function(){
+				FB.init({
+					appId: '1895136497388728',
+					xfbml: true,
+					version: 'v2.8'
+				});
+				FB.AppEvents.logPageView();
+			};
+			(function(d,s,id){
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if(d.getElementById(id)){return;}
+				js = d.createElement(s);js.id = id;
+				js.src = "//connect.facebook.net/en_US/sdk.js";
+				fjs.parentNode.insertBefore(js,fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
+       
+        <header align = "center">
+            <div class="container">
+                <div id="branding"></div>
+                    <h1>Word Cloud</h1>
+            </div>
+        </header>
+		
+       
+        <section id="showcase">
+            <p>
+                <img style="margin:0px auto;display:block"
+                     src="./images/tmpWordCloud.jpg">
+            </p>
+        </section>
+
+        <section id="search">
+            <form align = "center">
+                <input type="artist" placeholder="Enter artist..">
+            </form>
+        </section>
+
+        <section id="buttons">
+            <form align = "center">
+                <button type="Button" class="searchButton">Search</button>
+                <button onclick="location.href = 'Artist_Search.html'"  type = "Button" class="searchButton">Add</button>
+                <button onclick = "share()" type="Button" class="shareButton">Share</button>
+            </form>
+        </section>
+        
+       <script>
+		   var artists = [];
+	   </script>
+
+	
+      
+       <script>
+		   function share(){
+			   loginFacebook();
+		   }
+	   </script>
+       <script>
+			function loginFacebook(){
+				FB.login(function(){
+					FB.api('/me/feed','post',{message: 'Hello World from html!'});
+				}), {scope: 'publish_actions'};
+			}
+		</script>
+   
+    </body>
+</html>  

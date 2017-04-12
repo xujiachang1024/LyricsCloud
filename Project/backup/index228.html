@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Lyrics Cloud</title>
+	<!-- Le styles -->
+	<link href="//netdna.bootstrapcdn.com/bootstrap/2.2.2/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/bootstrap/2.2.2/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="./autocomplete/jquery-ui.css">
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.min.js"></script>
+	<script src="./src/wordcloud2.js"></script>
+	<script src="./index.js"></script>
+	<script src="./request.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="./autocomplete/jquery-ui.js"></script>
+	<script>
+	$( function() {
+		$( "#artistSearch" ).autocomplete({
+			source: function( request, response ) {
+			$.ajax({
+				data:{
+					apikey:"445d6196c08dc2b7490929f18149d684",
+					q_artist: request.term,
+					format:"jsonp",
+					callback:"jsonp_callback"
+				},
+				url: "http://api.musixmatch.com/ws/1.1/artist.search",
+				dataType: "jsonp",
+				jsonpCallback: 'jsonp_callback',
+				success: function(data){
+					var suggestionlist=[];
+					console.log(data);
+					var tmp = data.message.body.artist_list;
+					console.log(tmp);
+					if(tmp.length!=0){
+						var length = 5;
+						if(tmp.length < 5) length = tmp.length;
+						for(var i = 0; i < length; i++){
+							var name = tmp[i].artist.artist_name;
+							suggestionlist.push(name);
+						}
+					}
+					console.log(suggestionlist);
+					response(suggestionlist);
+				}
+			});
+			},
+			minLength: 2,
+		});
+	});
+	function search(){
+		console.log("search");
+		getSuggestionArtist();
+		showup();
+	}
+  </script>
+</head>
+<body>
+	<div class="container">
+		<p class="lead"><strong>Lyrics Cloud</strong></p>
+		<div id="not-supported" class="alert" hidden>
+			<strong>Your browser is not supported.</strong>
+		</div>
+		<form id="form" method="get" action="">
+			<div class="row">
+				<div class="span12" id="canvas-container">
+					<canvas id="canvas" class="canvas" type="hidden"></canvas>
+					<div id="html-canvas" class="canvas hide"></div>
+
+				</div>
+					<div class="ui-widget">
+						<label for="artistSearch">Artists: </label>
+						<input id="artistSearch">
+					</div>
+					<canvas id="mycanvas" class="canvas"></canvas>
+				
+					<button onclick="search()">Get Me My Artist Name!><button>
+					<a class="btn" id="btn-save" href="#" download="wordcloud.png" title="Save canvas">Save Image</a>
+				</div>
+			<div id="input-list" class="span12"><div>
+			<div id="config-option" class="span12"></div>
+			<input type="hidden" id="config-dppx" class="input-mini" min="1" value="1" required>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name = "viewport" content="width = device - width">
+	<meta name = "Keywords" content="word cloud, word cloud generations, cloud generations">
+	<meta name = "Description" content = "USC CSCI310 Software Engineering Project 1 Group 6">
+	<meta name = "author" content= "Yawen Cao, Xiaoyang(Leo) Liao, Juntao Shen, Jiachang(Ernest) Xu, Mengqian Yu, Lifan Zhao">
+	<title>Lyrics</title>
+	<!-- <link rel = "stylesheet" href= "css/style.css"> -->
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/2.2.2/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/2.2.2/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="./autocomplete/jquery-ui.css">
+	<link rel = "stylesheet" href = "./css/index_style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.min.js"></script>
+	<script src="./src/wordcloud2.js"></script>
+	<script src="./index.js"></script>
+	<script src="./request.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="./autocomplete/jquery-ui.js"></script>
+	<script type="text/javascript" src="http://tracking.musixmatch.com/t1.0/AMa6hJCIEzn1v8RuOP"></script>
+	<script>
+		$( document ).ready(function() {
+			//assume the url is in this format: ?track_id=id&word=word
+    		var data = location.search;
+    		var items = data.split("&");
+    		var items1 = items[0].split("=");
+    		var items2 = items1[1].split("#");
+    		var track_id = items2[0];
+    		var word = items[1].split("=")[1].split("#")[0];
+    		//var word = items[1].split("=")[1];
+    		console.log(track_id);
+    		console.log(word);
+    		//console.log(word);
+    		showSongTitle(track_id);
+    		showLyricsByTrackID(track_id, word);
+    		
+    
+	});
+	</script>
+	<script>
+		
+	</script> 
+
+	<style>
+	.highlight{
+		background:yellow;
+	}
+	</style>
+</head>
+
+<body>
+<section id = "Lyrics">
+	<div class = "container">
+		<h1 align="center" id="song_title">
+			(*Sample) Search in the box below
+		</h1>
+		<p aligh="center" id="lyrics_text">
+			
+		</p>
+		<form align="center">
+			<button onclick = "location.href = 'index.html'" type="Button" name="Button" class="click_buttons" >Back to Word Cloud Page</button>
+			<button onclick = "location.href = 'Song_list.html'" type="Button" name="Button" class="click_buttons" >Back to Song List Page</button>
+		</form>
+	</div>
+</section>
+
+</body>
+</html>

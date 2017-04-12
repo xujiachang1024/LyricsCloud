@@ -1,0 +1,61 @@
+/* CSS Document */
+body{
+	font: 15px/1.5 Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+	padding: 0;
+	margin: 0;
+	background-color: gray;
+}
+
+/*Global */
+.container{
+	width: 80%;
+	margin: auto;
+	overflow: hidden;
+}
+
+/* Search */
+#search{
+	padding: 20px;
+	color: black;
+	border: #800080;
+}
+
+#search h1{
+	float: middle;
+}
+
+#search form{
+	float: middle;
+}
+
+#search input[type = "artist"]{
+	height: 40px;
+	width: 450px;
+	outline-color: purple;
+}
+
+.searchButton{
+	padding: 4px;
+	height: 20px;
+	width: 150px;
+	background: #800080;
+	border: none;
+	color: black;
+}
+.shareButton{
+	padding: 4px;
+	height: 20px;
+	width: 150px;
+	background: #800080;
+	border: none;
+	color: black;	
+}
+
+.searchButton2{
+	padding: 4px;
+	height: 20px;
+	width: 450px;
+	background: #800080;
+	border: none;
+	color: black;
+}

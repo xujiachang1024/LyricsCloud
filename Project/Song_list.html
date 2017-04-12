@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name = "viewport" content="width = device - width">
+<meta name = "Keywords" content="word cloud, word cloud generations, cloud generations">
+<meta name = "Description" content = "USC CSCI310 Software Engineering Project 1 Group 6">
+<meta name = "author" content= "Yawen Cao, Xiaoyang(Leo) Liao, Juntao Shen, Jiachang(Ernest) Xu, Mengqian Yu, Lifan Zhao">
+
+<title>Song List</title>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="./src/wordcloud2.js"></script>
+<script src="./autocomplete/jquery-ui.js"></script>
+<script src="request.js"></script>
+<script src="songlist.js"></script>
+<link rel = "stylesheet" href = "./css/index_style.css">
+</head>
+<body>
+<script>
+
+$(document).ready(function(){
+	var data = location.search;
+	data = data.replace('?', '');
+	var items = data.split("&");
+	var word = items[0].split("=")[1];
+	var id = items[1].split("=")[1];
+	getList(word);
+	console.log(word);
+	console.log(id);
+	document.getElementById('word').innerHTML = word.toUpperCase();
+});
+
+
+</script>
+
+<section id = "Song_List">
+	<div class="container">
+		<h1 align="center" id='word'>
+		</h1>
+		<form align="right">
+			<button onclick = "location.href = 'index.html'" type="Button" name="Button" class = "click_buttons" >Back</button>
+		</form>
+	</div>
+	<div>
+		<ol id="songlist"></ol>
+	</div>
+</section>
+</body>
+</html>
